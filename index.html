@@ -10,6 +10,12 @@
 /* ─── RESET & BASE ─────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 :root {
   --void:    #080b0f;
   --dark:    #0e1217;
@@ -121,7 +127,8 @@ nav {
 /* Animated grid bg */
 #hero::before {
   content: '';
-  position: absolute; inset: 0; z-index: 0;
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
   background-image:
     linear-gradient(var(--border) 1px, transparent 1px),
     linear-gradient(90deg, var(--border) 1px, transparent 1px);
@@ -133,7 +140,7 @@ nav {
 /* Glowing orbs */
 #hero::after {
   content: '';
-  position: absolute;
+  position: fixed;
   top: -20%; left: -10%;
   width: 70vw; height: 70vw;
   background: radial-gradient(circle, rgba(77,159,255,0.06) 0%, transparent 65%),
@@ -500,6 +507,11 @@ section + section {
 
 .exp-entry.visible { opacity: 1; transform: translateX(0); }
 
+/* Hide earlier roles */
+#experience .exp-timeline .exp-entry:nth-last-child(-n+3) {
+  display: none;
+}
+
 .exp-entry::before {
   content: '';
   position: absolute; left: -37px; top: 7px;
@@ -830,6 +842,8 @@ footer {
 </style>
 </head>
 <body>
+
+<div class="page-container">
 
 <!-- NAV -->
 <nav id="navbar">
@@ -1263,6 +1277,8 @@ const sectionObserver = new IntersectionObserver((entries) => {
 
 sections.forEach(s => sectionObserver.observe(s));
 </script>
+
+</div>
 
 </body>
 </html>
